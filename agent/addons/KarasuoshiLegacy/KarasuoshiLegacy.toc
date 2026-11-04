@@ -1,0 +1,11 @@
+## Interface: 16001, 11508, 11507
+## Title: Karasuoshi Legacy
+## Notes: Личный план прокачки Osh и Ebosh: следующий шаг, рестед, профессии, почта, Легаси, данжи. /kl
+## Author: Karasuoshi
+## Version: 0.1.0
+## IconTexture: Interface\Icons\INV_Misc_Book_09
+## SavedVariables: KarasuoshiLegacyDB
+
+Data.lua
+Core.lua
+UI.lua
