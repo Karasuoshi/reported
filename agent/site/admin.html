@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Настройки гильдии · &lt;Reported&gt;</title>
+<meta name="theme-color" content="#060910">
+<link rel="icon" type="image/png" href="img/icon-64.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Open+Sans:wght@400;600&family=Philosopher:wght@400;700&display=swap">
+<link rel="stylesheet" href="roster.css?v=6">
+<style>
+:root{--acols:30px 50px minmax(0,1.25fr) minmax(0,.75fr) 150px minmax(0,1.3fr) 104px 150px}
+.gw-wrap{padding-right:0}
+.gw-body{grid-template-columns:minmax(0,1fr)}
+.pane{padding:22px 18px 26px; background:#0d0e0d; min-height:260px}
+.login{display:grid; gap:10px; max-width:400px; margin:0 auto; padding-top:18px}
+.login label{font:400 15px/1.3 var(--f-ui); color:var(--gold); text-shadow:1px 1px 0 #000}
+.login .line{display:flex; gap:8px}
+.login .inp{height:32px; font-size:15px}
+.login .gw-red{margin:0; height:32px}
+.links{display:grid; gap:8px; padding:10px 12px; background:#131313; border-bottom:1px solid #2a2a2a}
+.link{display:grid; grid-template-columns:110px minmax(0,1fr) auto; gap:10px; align-items:center; font:400 13px/1.3 var(--f-ui); text-shadow:1px 1px 0 #000}
+.link span{color:var(--gold)}
+.link code{font:12.5px/1.3 var(--f-mono); color:#fff; overflow-wrap:anywhere; background:#050505; padding:5px 8px; border-radius:3px; border:1px solid #333}
+.link .gw-red{margin:0; height:26px; padding:0 12px; font-size:13px}
+.ahead{display:grid; grid-template-columns:var(--acols); gap:0 2px; padding:6px 4px 0; background:linear-gradient(180deg,#252220,#1d1b19)}
+.ahead span{display:flex; align-items:center; height:24px; padding:0 7px; border-radius:5px 5px 0 0; background:linear-gradient(180deg,#2c2a27 0%,#3d3c3a 40%,#2b2927 100%); border:1px solid #6f6d6f; border-bottom:0;
+  font:400 12.5px/1 var(--f-ui); color:#f4f1ea; text-shadow:1px 1px 0 #000; white-space:nowrap; overflow:hidden}
+.alist{border-top:1px solid #6f6d6f; background:#0d0e0d; min-height:200px}
+.arow{display:grid; grid-template-columns:var(--acols); gap:0 2px; align-items:center; min-height:36px; padding:3px 4px; font:400 13.5px/1.2 var(--f-ui); color:#fff; text-shadow:1px 1px 0 #000}
+.arow:nth-child(odd){background:#171717} .arow:nth-child(even){background:#1c1c1c}
+.arow > *{min-width:0; padding:0 6px}
+.arow .num{color:#8a8a8a; font-size:12.5px}
+.arow .cl{display:flex; justify-content:center; padding:0}
+.arow .nm{white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.arow .rc{color:#e8e3d6; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.arow .tm{color:#9a9a9a; font:11.5px/1.3 var(--f-mono)}
+.arow .tm em{display:block; font-style:normal; color:#6e6e6e}
+.arow .sel-rank, .arow .inp-note{height:28px; padding:0 6px}
+.arow.saving{box-shadow:inset 3px 0 0 var(--gold)}
+.arow.saved{box-shadow:inset 3px 0 0 #3ddc3d}
+.del{height:28px; width:100%; border-radius:3px; border:1px solid #000; cursor:pointer; background:linear-gradient(180deg,#3a3a3a,#222); box-shadow:inset 0 0 0 1px #5a5a5a; color:#cfcfcf; font:400 12.5px/1 var(--f-ui); text-shadow:1px 1px 0 #000}
+.del:hover{color:#fff; box-shadow:inset 0 0 0 1px var(--bad)}
+.del.arm{background:linear-gradient(180deg,#9a110e,#5a0303); color:#fff; box-shadow:inset 0 0 0 1px #a8803a}
+.arow .xname{display:none}
+.acts{display:flex; gap:4px}
+.lnk{height:28px; padding:0 8px; border-radius:3px; border:1px solid #000; cursor:pointer; background:linear-gradient(180deg,#3a3a3a,#222); box-shadow:inset 0 0 0 1px #5a5a5a; color:#cfcfcf; font:400 12.5px/1 var(--f-ui); text-shadow:1px 1px 0 #000; white-space:nowrap}
+.lnk:hover{color:#fff; box-shadow:inset 0 0 0 1px var(--gold)}
+.lnk.done{color:#7dff7d}
+.motdrow{display:grid; grid-template-columns:110px minmax(0,1fr) auto; gap:10px; align-items:center; font:400 13px/1.3 var(--f-ui); text-shadow:1px 1px 0 #000}
+.motdrow span{color:#40ff40}
+.motdrow .inp{height:30px; color:#40ff40}
+.sec{display:flex; align-items:center; justify-content:space-between; gap:10px; padding:14px 12px 8px; margin-top:6px; background:linear-gradient(180deg,#252220,#1d1b19); border-top:1px solid #3a3733}
+.sec h2{margin:0; font:400 15px/1.2 var(--f-ui); color:var(--gold); text-shadow:1px 1px 0 #000}
+.clog{max-height:420px; overflow-y:auto; background:#0b0c0b; padding:6px 0; font:14px/1.45 var(--f-tip); text-shadow:1px 1px 0 #000; border-top:1px solid #262626}
+.clog .m{display:grid; grid-template-columns:minmax(0,1fr) auto; gap:10px; align-items:start; padding:3px 12px}
+.clog .m:hover{background:rgba(255,255,255,.04)}
+.clog .t{color:#40ff40; overflow-wrap:anywhere}
+.clog .ts{color:#8c8c8c}
+.clog .x{height:24px; min-width:28px; padding:0 7px; border-radius:3px; border:1px solid #000; cursor:pointer; background:#1f1f1f; box-shadow:inset 0 0 0 1px #4a4a4a; color:#aaa; font:12px/1 var(--f-ui)}
+.clog .x:hover{color:#fff; box-shadow:inset 0 0 0 1px var(--bad)}
+.clog .x.arm{background:#5a0303; color:#fff}
+.clog .empty{padding:14px 12px; color:#9d9d9d; font-family:var(--f-ui)}
+@media (max-width:760px){
+  .link{grid-template-columns:minmax(0,1fr) auto} .link span{grid-column:1/-1}
+  .ahead{display:none}
+  .arow{grid-template-columns:34px minmax(0,1fr) minmax(0,1fr); gap:7px 6px; padding:9px 8px}
+  .arow > *{padding:0}
+  .arow .num, .arow .rc, .arow .tm{display:none}
+  .arow .cl{grid-column:1; grid-row:1}
+  .arow .nm{grid-column:2; grid-row:1; white-space:normal}
+  .arow .xdel{grid-column:3; grid-row:1; justify-self:end}
+  .motdrow{grid-template-columns:minmax(0,1fr) auto} .motdrow span{grid-column:1/-1}
+  .lnk, .del{height:30px}
+  .arow .xrank{grid-column:1 / 3; grid-row:2}
+  .arow .xnote{grid-column:3; grid-row:2}
+  .arow .xname{display:block; font-size:12px; color:#bdb3a0; margin-top:2px}
+  .arow .sel-rank, .arow .inp-note{height:32px; font-size:14px}
+  .del{height:30px}
+}
+</style>
+</head>
+<body>
+<main class="stage">
+  <a class="brand" href="./" aria-label="К камню возвращения"><img class="moon" src="img/moon.webp" alt="Reported" width="406" height="440"><p class="np">&lt;Reported&gt;</p></a>
+
+  <div class="gw-wrap">
+    <section class="gw" aria-labelledby="gwTitle">
+      <div class="gw-portrait" id="portrait"></div>
+      <header class="gw-top">
+        <h1 id="gwTitle">Настройки гильдии</h1>
+        <div class="gw-ctl"><a class="gw-x" href="roster.html" aria-label="Закрыть и открыть ростер"><svg viewBox="0 0 16 16"><path d="M4 4l8 8M12 4l-8 8"/></svg></a></div>
+      </header>
+
+      <div class="gw-body">
+        <div class="gw-main">
+          <div class="gw-bar"><span class="chk" aria-hidden="true"><svg viewBox="0 0 20 18"><path d="M3 9.5l5 5L18 2"/></svg></span><span id="count">Только для офицеров</span><span class="r" id="status" role="status"></span></div>
+
+          <form class="pane" id="login" autocomplete="off">
+            <div class="login">
+              <label for="pw">Пароль офицера</label>
+              <div class="line">
+                <input class="inp" id="pw" type="password" autocomplete="current-password">
+                <button class="gw-red" type="submit" id="loginBtn">Войти</button>
+              </div>
+              <p class="note bad" id="loginErr" role="alert" hidden></p>
+              <p class="note">Пароль лежит в файле config.php на хостинге.</p>
+            </div>
+          </form>
+
+          <div id="adminView" hidden>
+            <div class="links">
+              <div class="link"><span>Камень</span><code id="lStone"></code><button type="button" class="gw-red gray" data-copy="lStone">Копировать</button></div>
+              <div class="link"><span>Ростер</span><code id="lRoster"></code><button type="button" class="gw-red gray" data-copy="lRoster">Копировать</button></div>
+              <form class="motdrow" id="motdForm"><span>Сообщение дня</span><input class="inp" id="motd" maxlength="128" placeholder="Сообщение дня гильдии"><button type="submit" class="gw-red gray">Сохранить</button></form>
+            </div>
+            <div class="ahead" aria-hidden="true"><span>#</span><span>Класс</span><span>Имя</span><span>Раса</span><span>Звание</span><span>Заметка</span><span>Записался</span><span></span></div>
+            <div class="alist" id="rows"></div>
+            <div class="sec"><h2>Гильдейский чат</h2><button type="button" class="gw-red gray" id="clearChat" style="margin:0">Очистить чат</button></div>
+            <div class="clog" id="clog"></div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="gw-foot">
+        <span class="l" id="foot"></span>
+        <button type="button" class="gw-red gray" id="refresh" hidden>Обновить</button>
+        <button type="button" class="gw-red gray" id="logout" hidden style="margin-left:0">Выйти</button>
+        <a class="gw-red" href="roster.html" style="margin-left:0" id="toRoster">Открыть ростер</a>
+      </footer>
+    </section>
+  </div>
+</main>
+
+<script src="guild.js?v=5"></script>
+<script>
+(function(){
+const $ = id => document.getElementById(id);
+const {esc, plural, fullName} = G;
+$('portrait').innerHTML = G.emblem;
+let key = '', list = [];
+try { key = sessionStorage.getItem('reported_admin') || ''; } catch (e) {}
+
+async function call(action, extra){
+  const res = await fetch('api.php?action=' + action, {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(Object.assign({key}, extra || {}))});
+  let data = null; try { data = await res.json(); } catch (e) {}
+  if (!data) throw {message: 'Сервер не ответил. Попробуй ещё раз.'};
+  if (!data.ok) throw {message: data.message || 'Ошибка', code: data.error};
+  return data;
+}
+function status(msg, cls){ $('status').textContent = msg || ''; $('status').className = 'r ' + (cls || ''); }
+
+function render(){
+  const n = list.length;
+  $('count').textContent = `Записались: ${n}`;
+  $('foot').textContent = n ? 'Звание и заметка сохраняются сами' : '';
+  if (!n){ $('rows').innerHTML = '<div class="gw-empty"><b>Пока никого</b><span>Как только кто-то нажмёт на камень и запишется, он появится здесь.</span></div>'; return; }
+  $('rows').innerHTML = list.map((e, i) => {
+    const name = fullName(e), rank = e.rank == null ? 3 : +e.rank;
+    return `<div class="arow" data-id="${esc(e.id)}">
+      <span class="num">${i + 1}</span>
+      <span class="cl" title="${esc(G.CLASSES[e.cls] || '')}">${G.classIcon(e.cls)}</span>
+      <span class="nm"><span style="color:var(--${esc(e.cls)})">${esc(name)}</span><span class="xname">${esc(G.RACES[e.race] || '')} · ${esc(G.CLASSES[e.cls] || '')} · ${esc(G.dateShort(e.at))}</span></span>
+      <span class="rc">${esc(G.RACES[e.race] || '')}</span>
+      <span class="xrank"><select class="inp sel-rank" aria-label="Звание: ${esc(name)}">${G.RANKS.map((r, k) => `<option value="${k}"${k === rank ? ' selected' : ''}>${esc(r)}</option>`).join('')}</select></span>
+      <span class="xnote"><input class="inp inp-note" maxlength="31" value="${esc(e.note || '')}" placeholder="Заметка" aria-label="Заметка: ${esc(name)}"></span>
+      <span class="tm">${esc(e.time || e.at)}${e.changed ? `<em>изм. ${esc(e.changed)}</em>` : ''}</span>
+      <span class="xdel acts"><button type="button" class="lnk" data-name="${esc(name)}" title="Личная ссылка в чат — для входа с другого устройства">Ссылка</button><button type="button" class="del" data-name="${esc(name)}" aria-label="Исключить ${esc(name)}">Исключить</button></span>
+    </div>`;
+  }).join('');
+}
+
+async function load(){
+  status('Загружаю…');
+  try {
+    const data = await call('admin_list');
+    list = data.entries || []; render(); setMotd(data.motd); loadChat();
+    const t = new Date(); status('Обновлено в ' + String(t.getHours()).padStart(2, '0') + ':' + String(t.getMinutes()).padStart(2, '0'));
+    return true;
+  } catch (err) {
+    if (err.code === 'bad_password'){ logout('Пароль больше не подходит. Войди заново.'); return false; }
+    status(err.message || 'Не удалось загрузить.', 'bad'); return false;
+  }
+}
+
+function showAdmin(){
+  $('login').hidden = true; $('adminView').hidden = false; $('refresh').hidden = false; $('logout').hidden = false;
+  const base = new URL('./', location.href).href;
+  $('lStone').textContent = base; $('lRoster').textContent = base + 'roster.html';
+}
+function logout(msg){
+  key = ''; list = []; try { sessionStorage.removeItem('reported_admin'); } catch (e) {}
+  $('adminView').hidden = true; $('login').hidden = false; $('refresh').hidden = true; $('logout').hidden = true;
+  $('count').textContent = 'Только для офицеров'; $('foot').textContent = ''; status('');
+  $('loginErr').textContent = msg || ''; $('loginErr').hidden = !msg; $('pw').value = ''; $('pw').focus();
+}
+
+$('login').addEventListener('submit', async e => {
+  e.preventDefault();
+  key = $('pw').value.trim(); if (!key) return;
+  $('loginBtn').disabled = true; $('loginErr').hidden = true;
+  try {
+    const data = await call('admin_list');
+    try { sessionStorage.setItem('reported_admin', key); } catch (x) {}
+    list = data.entries || []; showAdmin(); render(); setMotd(data.motd); loadChat(); status('Вход выполнен.', 'ok');
+  } catch (err) {
+    $('loginErr').textContent = err.code === 'bad_password' ? 'Неверный пароль.' : (err.message || 'Не удалось войти.');
+    $('loginErr').hidden = false;
+  } finally { $('loginBtn').disabled = false; }
+});
+$('refresh').addEventListener('click', load);
+$('logout').addEventListener('click', () => logout(''));
+
+// звание и заметка — сохраняются сразу
+async function save(row){
+  const id = row.dataset.id, e = list.find(x => x.id === id); if (!e) return;
+  const rank = +row.querySelector('.sel-rank').value, note = row.querySelector('.inp-note').value.trim();
+  if (rank === (e.rank == null ? 3 : +e.rank) && note === (e.note || '')) return;
+  row.classList.remove('saved'); row.classList.add('saving');
+  try {
+    const data = await call('update', {id, rank, note});
+    e.rank = data.entry.rank; e.note = data.entry.note;
+    row.querySelector('.inp-note').value = e.note;
+    row.classList.remove('saving'); row.classList.add('saved');
+    status(`Сохранено: ${fullName(e)}`, 'ok');
+  } catch (err) {
+    row.classList.remove('saving');
+    if (err.code === 'bad_password') return logout('Пароль больше не подходит. Войди заново.');
+    status(err.message || 'Не удалось сохранить.', 'bad');
+  }
+}
+$('rows').addEventListener('change', e => { const row = e.target.closest('.arow'); if (row && e.target.matches('.sel-rank')) save(row); });
+$('rows').addEventListener('focusout', e => { const row = e.target.closest('.arow'); if (row && e.target.matches('.inp-note')) save(row); });
+$('rows').addEventListener('keydown', e => { if (e.key === 'Enter' && e.target.matches('.inp-note')){ e.preventDefault(); e.target.blur(); } });
+
+// исключить — в два нажатия
+let armed = null, armTimer = null;
+$('rows').addEventListener('click', async e => {
+  const b = e.target.closest('.del'); if (!b) return;
+  if (armed !== b){
+    if (armed){ armed.classList.remove('arm'); armed.textContent = 'Исключить'; }
+    armed = b; b.classList.add('arm'); b.textContent = 'Точно?';
+    clearTimeout(armTimer); armTimer = setTimeout(() => { if (armed){ armed.classList.remove('arm'); armed.textContent = 'Исключить'; armed = null; } }, 3500);
+    return;
+  }
+  clearTimeout(armTimer); armed = null; b.disabled = true;
+  const id = b.closest('.arow').dataset.id;
+  let msg = '', cls = 'ok';
+  try { await call('delete', {id}); msg = `Исключён: ${b.dataset.name}`; }
+  catch (err) { msg = err.message || 'Не удалось исключить.'; cls = 'bad'; }
+  await load(); status(msg, cls);
+});
+
+// сообщение дня
+function setMotd(m){ if (document.activeElement !== $('motd')) $('motd').value = m || ''; }
+$('motdForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  try { const d = await call('motd_set', {motd: $('motd').value}); $('motd').value = d.motd; status('Сообщение дня сохранено.', 'ok'); }
+  catch (err) { if (err.code === 'bad_password') return logout('Пароль больше не подходит. Войди заново.'); status(err.message || 'Не удалось сохранить.', 'bad'); }
+});
+
+// личная ссылка в чат
+function copyText(text){
+  if (navigator.clipboard && navigator.clipboard.writeText) return navigator.clipboard.writeText(text);
+  const t = document.createElement('textarea'); t.value = text; document.body.appendChild(t); t.select();
+  try { document.execCommand('copy'); } finally { t.remove(); }
+  return Promise.resolve();
+}
+$('rows').addEventListener('click', async e => {
+  const b = e.target.closest('.lnk'); if (!b) return;
+  const id = b.closest('.arow').dataset.id;
+  try {
+    const d = await call('member_link', {id});
+    const url = new URL('roster.html#k=' + d.token, location.href).href;
+    await copyText(url);
+    b.textContent = 'Готово'; b.classList.add('done'); setTimeout(() => { b.textContent = 'Ссылка'; b.classList.remove('done'); }, 1800);
+    status(`Личная ссылка ${b.dataset.name} скопирована. Отправь её только ему.`, 'ok');
+  } catch (err) { if (err.code === 'bad_password') return logout('Пароль больше не подходит. Войди заново.'); status(err.message || 'Не удалось получить ссылку.', 'bad'); }
+});
+
+// модерация чата
+let chat = [];
+const two = n => String(n).padStart(2, '0');
+const stamp = ts => { const d = new Date(ts * 1000); return two(d.getDate()) + '.' + two(d.getMonth() + 1) + ' ' + two(d.getHours()) + ':' + two(d.getMinutes()); };
+async function loadChat(){
+  try { const d = await call('chat_list', {since: 0}); chat = d.msgs || []; renderChat(); }
+  catch (err) { $('clog').innerHTML = `<div class="empty">${esc(err.message || 'Не удалось загрузить чат.')}</div>`; }
+}
+function renderChat(){
+  if (!chat.length){ $('clog').innerHTML = '<div class="empty">В чате пока пусто.</div>'; return; }
+  $('clog').innerHTML = chat.slice().reverse().map(m => `<div class="m" data-id="${m.id}"><span class="t"><span class="ts">[${stamp(m.ts)}]</span> <span style="color:var(--${esc(m.c)})">[${esc(m.n)}]</span>: ${esc(m.t)}</span><button type="button" class="x" aria-label="Удалить сообщение">✕</button></div>`).join('');
+}
+let armedMsg = null;
+$('clog').addEventListener('click', async e => {
+  const b = e.target.closest('.x'); if (!b) return;
+  if (armedMsg !== b){ if (armedMsg){ armedMsg.classList.remove('arm'); armedMsg.textContent = '✕'; } armedMsg = b; b.classList.add('arm'); b.textContent = 'Удалить?'; return; }
+  armedMsg = null; b.disabled = true;
+  try { await call('chat_delete', {id: +b.closest('.m').dataset.id}); status('Сообщение удалено.', 'ok'); }
+  catch (err) { status(err.message || 'Не удалось удалить.', 'bad'); }
+  loadChat();
+});
+let clearArmed = false, clearTimer = null;
+$('clearChat').addEventListener('click', async () => {
+  const b = $('clearChat');
+  if (!clearArmed){ clearArmed = true; b.textContent = 'Точно очистить?'; clearTimeout(clearTimer); clearTimer = setTimeout(() => { clearArmed = false; b.textContent = 'Очистить чат'; }, 3500); return; }
+  clearArmed = false; b.textContent = 'Очистить чат';
+  try { await call('chat_clear'); status('Чат очищен.', 'ok'); } catch (err) { status(err.message || 'Не удалось очистить.', 'bad'); }
+  loadChat();
+});
+
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-copy]'); if (!b) return;
+  const text = $(b.dataset.copy).textContent;
+  const done = () => { const t = b.textContent; b.textContent = 'Скопировано'; setTimeout(() => b.textContent = t, 1500); };
+  if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, () => {});
+});
+
+if (key){ showAdmin(); load(); } else { $('pw').focus(); }
+})();
+</script>
+</body>
+</html>

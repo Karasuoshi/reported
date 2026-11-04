@@ -1,0 +1,11 @@
+## Interface: 16001, 11508, 11507
+## Title: Karasuoshi Rested Buff
+## Notes: Tracks your XP / rested buffs (food, sleeping bag, camp tent, campfire), reminds you when one is missing and lets you fix it with one click.
+## Author: Karasuoshi
+## Version: 1.8.0
+## IconTexture: Interface\Icons\Spell_Nature_Sleep
+## SavedVariables: KarasuoshiRestedBuffDB
+## SavedVariablesPerCharacter: KarasuoshiRestedBuffCharDB
+
+Core.lua
+UI.lua

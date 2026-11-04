@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Гильдия и сообщества · &lt;Reported&gt;</title>
+<meta name="description" content="Кто уже нажал на камень возвращения и идёт с гильдией Reported в WoW Forever.">
+<meta name="theme-color" content="#060910">
+<link rel="icon" type="image/png" href="img/icon-64.png">
+<link rel="apple-touch-icon" href="img/icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Open+Sans:wght@400;600&family=Philosopher:wght@400;700&display=swap">
+<link rel="stylesheet" href="roster.css?v=6">
+</head>
+<body>
+<main class="stage">
+  <a class="brand" href="./" aria-label="К камню возвращения"><img class="moon" src="img/moon.webp" alt="Reported" width="406" height="440"><p class="np">&lt;Reported&gt;</p></a>
+
+  <div class="gw-wrap">
+    <section class="gw" id="gw" aria-labelledby="gwTitle">
+      <div class="gw-portrait" id="portrait"></div>
+      <header class="gw-top">
+        <h1 id="gwTitle">Гильдия и сообщества</h1>
+        <div class="gw-ctl">
+          <button type="button" class="gw-x mini-btn" id="miniBtn" aria-label="Скрыть список сообществ" aria-pressed="false"><svg viewBox="0 0 16 16"><path d="M12.5 3.5l-8 8M4.5 5.5v6h6"/></svg></button>
+          <a class="gw-x" href="./" aria-label="Закрыть и вернуться к камню"><svg viewBox="0 0 16 16"><path d="M4 4l8 8M12 4l-8 8"/></svg></a>
+        </div>
+      </header>
+
+      <div class="gw-body">
+        <aside class="gw-side" aria-label="Сообщества">
+          <div class="gw-comms">
+            <div class="gw-comm sel"><span class="banner" id="banner"></span><b>Reported</b></div>
+            <a class="gw-comm join" href="./" id="join" hidden><span class="plus" aria-hidden="true"></span><b>Вступить в гильдию</b></a>
+          </div>
+          <div class="gw-sb off" aria-hidden="true"><button type="button" tabindex="-1" disabled><svg viewBox="0 0 12 9"><path d="M2 6.5l4-4 4 4"/></svg></button><div class="track"></div><button type="button" tabindex="-1" disabled><svg viewBox="0 0 12 9"><path d="M2 2.5l4 4 4-4"/></svg></button></div>
+        </aside>
+
+        <div class="gw-main">
+          <div class="gw-bar">
+            <span class="chk" id="barChk" aria-hidden="true"><svg viewBox="0 0 20 18"><path d="M3 9.5l5 5L18 2"/></svg></span><span id="count">Загружаю ростер…</span>
+            <span class="r" id="launch"></span><span class="r online" id="online" hidden></span>
+          </div>
+
+          <div class="gw-view" id="vRoster">
+            <div class="gw-head" role="row">
+              <button type="button" class="th" data-k="lvl" role="columnheader">Ур.<i>▲</i></button>
+              <button type="button" class="th" data-k="cls" role="columnheader">Класс<i>▲</i></button>
+              <button type="button" class="th" data-k="name" role="columnheader">Имя<i>▲</i></button>
+              <button type="button" class="th" data-k="race" role="columnheader">Раса<i>▲</i></button>
+              <button type="button" class="th c-rank" data-k="rank" role="columnheader">Звание<i>▲</i></button>
+              <button type="button" class="th c-note" data-k="note" role="columnheader">Заметка<i>▲</i></button>
+            </div>
+            <div class="gw-listwrap">
+              <div class="gw-list" id="list" role="rowgroup" aria-label="Состав гильдии" tabindex="-1"></div>
+              <div class="gw-sb" id="sb" aria-hidden="true"><button type="button" tabindex="-1" data-d="-1"><svg viewBox="0 0 12 9"><path d="M2 6.5l4-4 4 4"/></svg></button><div class="track"><div class="thumb" id="thumb"></div></div><button type="button" tabindex="-1" data-d="1"><svg viewBox="0 0 12 9"><path d="M2 2.5l4 4 4-4"/></svg></button></div>
+            </div>
+          </div>
+
+          <div class="gw-view" id="vChat" hidden>
+            <div class="gw-chatgrid">
+              <div class="gw-chatcol">
+                <div class="gw-chat" id="chat" role="log" aria-live="polite" aria-label="Гильдейский чат"></div>
+                <form class="gw-say" id="say" autocomplete="off" hidden>
+                  <input id="sayIn" maxlength="255" enterkeyhint="send" spellcheck="true" placeholder="Написать гильдии…" aria-label="Сообщение гильдии">
+                  <button type="submit" class="gw-send" aria-label="Отправить"><svg viewBox="0 0 16 16"><path d="M2 8h10M8.5 4l4 4-4 4"/></svg></button>
+                </form>
+                <div class="gw-sayoff" id="sayOff" hidden></div>
+              </div>
+              <div class="gw-members" id="members" aria-label="Члены гильдии"></div>
+            </div>
+          </div>
+          <div class="gw-view" id="vInfo" hidden><div class="gw-info" id="info"></div></div>
+        </div>
+      </div>
+
+      <footer class="gw-foot">
+        <nav class="gw-tabs" aria-label="Разделы">
+          <button type="button" class="gw-tab" data-view="chat" aria-pressed="false"><svg viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="bub" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#9d9d9d"/></linearGradient></defs><path d="M16 5C8.8 5 3.5 9.1 3.5 14.3c0 3.2 2 6 5.2 7.7l-1.2 5.3 5.4-4.1c1 .2 2 .3 3.1.3 7.2 0 12.5-4.1 12.5-9.2S23.2 5 16 5z" fill="url(#bub)" stroke="#000" stroke-width="1"/></svg><span class="tip">Чат гильдии</span><span class="cnt" id="unread" hidden></span></button>
+          <button type="button" class="gw-tab" data-view="roster" aria-pressed="true"><svg viewBox="0 0 32 32" aria-hidden="true"><g fill="#050505" stroke="#ffd84a" stroke-width="1.3" stroke-linejoin="round"><path d="M7.5 5.5a2.6 2.6 0 110 5.2 2.6 2.6 0 010-5.2zM3.5 17c0-3.2 1.8-5 4-5s4 1.8 4 5z"/><path d="M24.5 5.5a2.6 2.6 0 110 5.2 2.6 2.6 0 010-5.2zM20.5 17c0-3.2 1.8-5 4-5s4 1.8 4 5z"/><path d="M16 13a3.6 3.6 0 110 7.2A3.6 3.6 0 0116 13zM9.5 29c0-4.6 2.8-7.4 6.5-7.4s6.5 2.8 6.5 7.4z"/></g></svg><span class="tip">Ростер</span></button>
+          <button type="button" class="gw-tab" data-view="info" aria-pressed="false"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="1" y="1" width="30" height="30" rx="2" fill="#1a1d3a"/><path d="M7 6.5h17.5c1.4 0 2.2 1 2.2 2.2s-.8 2-2 2H24v12.2c0 1.8-1.2 3-3 3H8.2c-1.6 0-2.7-1.1-2.7-2.6s1-2.4 2.3-2.4H9V8.8c0-.1 0-.2-.1-.3-.1-.8-.8-1.3-1.9-2z" fill="#e8d6a8" stroke="#6b5530" stroke-width=".9"/><path d="M11.5 12h9M11.5 15h9M11.5 18h7" stroke="#7a6645" stroke-width="1.1"/></svg><span class="tip">Информация о гильдии</span></button>
+          <a class="gw-tab" href="./"><img src="img/hearthstone.webp" alt=""><span class="tip">Камень возвращения</span><span style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Камень возвращения</span></a>
+        </nav>
+      </footer>
+    </section>
+  </div>
+</main>
+
+<div class="gtt" id="tt" role="tooltip"></div>
+
+<script src="guild.js?v=5"></script>
+<script>
+(function(){
+const $ = id => document.getElementById(id);
+const {esc, plural, fullName, rankName} = G;
+
+$('portrait').innerHTML = G.emblem;
+$('banner').innerHTML = G.emblem;
+
+let entries = [], motd = '', view = 'roster', sortK = 'rank', sortDir = 1, selId = null, loaded = false, mePicked = false;
+
+// ---------- кто я ----------
+let me = null;
+try { me = JSON.parse(localStorage.getItem('reported_me') || 'null'); } catch (e) {}
+let token = me && /^[a-f0-9]{32}$/.test(me.token || '') ? me.token : '';
+const meKey = () => me ? (me.first + ' ' + (me.last || '')).trim().toLowerCase() : '';
+const isMe = e => !!meKey() && fullName(e).toLowerCase() === meKey();
+function saveMe(e, tok){
+  me = {first: e.first, last: e.last || '', id: e.id, token: tok || ''}; token = me.token;
+  try { localStorage.setItem('reported_me', JSON.stringify(me)); } catch (x) {}
+}
+function forgetToken(){
+  token = ''; if (me){ me.token = ''; try { localStorage.setItem('reported_me', JSON.stringify(me)); } catch (x) {} }
+}
+async function post(action, body){
+  const res = await fetch('api.php?action=' + action, {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(body || {})});
+  let data = null; try { data = await res.json(); } catch (e) {}
+  if (!data) throw {message: 'Сервер не ответил.'};
+  if (!data.ok) throw {message: data.message || 'Ошибка', code: data.error};
+  return data;
+}
+
+// личная ссылка от офицера: roster.html#k=ключ
+const h = location.hash;
+const linkKey = /^#k=([a-f0-9]{32})$/.exec(h);
+if (linkKey || h === '#chat') view = 'chat';
+if (linkKey) history.replaceState(null, '', location.pathname + '#chat');
+
+// ---------- ростер ----------
+const VAL = {
+  lvl: e => e.n,
+  cls: e => G.CLASSES[e.cls] || '',
+  name: e => fullName(e).toLowerCase(),
+  race: e => G.RACES[e.race] || '',
+  rank: e => e.rank,
+  note: e => (e.note || '').toLowerCase() || '￿'
+};
+function sorted(){
+  const list = entries.map((e, i) => Object.assign({n: i}, e, {rank: e.rank == null ? 3 : +e.rank}));
+  list.sort((a, b) => {
+    const x = VAL[sortK](a), y = VAL[sortK](b);
+    const c = x < y ? -1 : x > y ? 1 : 0;
+    return c * sortDir || a.rank - b.rank || a.n - b.n;
+  });
+  return list;
+}
+const CROWN = '<svg class="crown" viewBox="0 0 13 9" aria-label="Глава гильдии"><path d="M1 8.5h11L12.6 2 9.3 4.6 6.5.6 3.7 4.6.4 2z"/></svg>';
+
+function renderRoster(){
+  document.querySelectorAll('.gw-head .th').forEach(b => {
+    b.setAttribute('aria-sort', b.dataset.k === sortK ? (sortDir > 0 ? 'ascending' : 'descending') : 'none');
+    b.querySelector('i').textContent = b.dataset.k === sortK && sortDir < 0 ? '▼' : '▲';
+  });
+  if (!entries.length){
+    $('list').innerHTML = loaded
+      ? '<div class="gw-empty"><b>В гильдии пока никого</b><span>Первый, кто нажмёт на камень возвращения, окажется здесь.</span><a href="./">Нажать на камень →</a></div>'
+      : '<div class="gw-empty">Загружаю ростер…</div>';
+    syncBar(); return;
+  }
+  $('list').innerHTML = sorted().map(e => {
+    const race = G.RACES[e.race] || '—', cls = G.CLASSES[e.cls] || '—';
+    return `<div class="row${e.id === selId ? ' sel' : ''}" role="row" tabindex="0" data-id="${esc(e.id)}" aria-selected="${e.id === selId}">
+      <span class="lvl" role="cell">1</span>
+      <span class="cl" role="cell" title="${esc(cls)}">${G.classIcon(e.cls)}</span>
+      <span class="nm" role="cell"><em style="color:var(--${esc(e.cls)})">${esc(fullName(e))}</em>${e.rank === 0 ? CROWN : ''}</span>
+      <span class="zn" role="cell">${esc(race)}</span>
+      <span class="rk" role="cell">${esc(rankName(e.rank))}</span>
+      <span class="note" role="cell">${esc(e.note || '')}</span>
+    </div>`;
+  }).join('');
+  syncBar();
+}
+
+function renderTop(){
+  const n = entries.length;
+  $('count').textContent = loaded ? `Записались на Forever: ${n}` : 'Загружаю ростер…';
+  const d = G.daysLeft();
+  $('launch').innerHTML = G.RELEASE > Date.now() ? `до старта <b>${d}</b> ${plural(d, ['день', 'дня', 'дней'])}` : 'WoW Forever открыт';
+  // «Вступить в гильдию» — только для тех, кто ещё не записался
+  $('join').hidden = !loaded || !!token || entries.some(isMe);
+  renderBar();
+}
+
+// ---------- гильдейский чат ----------
+let msgs = [], chatLoaded = false, chatErr = '', unread = 0, sending = false, pollTimer = null, online = new Set();
+const two = n => String(n).padStart(2, '0');
+const MONTHS = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+function stamp(ts){ const d = new Date(ts * 1000); return two(d.getHours()) + ':' + two(d.getMinutes()); }
+function dayLabel(ts){
+  const d = new Date(ts * 1000), t = new Date(); t.setHours(0, 0, 0, 0);
+  const diff = Math.round((t - new Date(d.getFullYear(), d.getMonth(), d.getDate())) / 864e5);
+  return diff === 0 ? 'Сегодня' : diff === 1 ? 'Вчера' : d.getDate() + ' ' + MONTHS[d.getMonth()];
+}
+const nameTag = (name, cls) => `<span class="nm" style="color:var(--${esc(cls)})">[${esc(name)}]</span>`;
+function renderChat(){
+  const box = $('chat');
+  const stick = box.scrollHeight - box.scrollTop - box.clientHeight < 40;
+  const ev = [];
+  entries.forEach(e => { if (e.ts) ev.push({ts: e.ts, k: 0, html: `<span class="sys">${nameTag(fullName(e), e.cls)} вступает в гильдию.</span>`}); });
+  if (token) msgs.forEach(m => ev.push({ts: m.ts, k: 1, id: m.id, html: `<span class="g">${nameTag(m.n, m.c)}: ${esc(m.t)}</span>`}));
+  ev.sort((a, b) => a.ts - b.ts || a.k - b.k || (a.id || 0) - (b.id || 0));
+  const lines = []; let day = '';
+  ev.slice(-400).forEach(x => {
+    const dl = dayLabel(x.ts);
+    if (dl !== day){ day = dl; lines.push(`<p class="day">${esc(dl)}</p>`); }
+    lines.push(`<p><span class="ts">${stamp(x.ts)}</span> ${x.html}</p>`);
+  });
+  if (motd) lines.unshift(`<p><span class="g">Сообщение дня гильдии: ${esc(motd)}</span></p>`);
+  if (!token) lines.push('<p><span class="sys">Гильдейский чат видят только члены гильдии.</span></p>');
+  else if (chatErr) lines.push(`<p><span class="sys">${esc(chatErr)}</span></p>`);
+  box.innerHTML = lines.join('');
+  if (stick || !renderChat.done){ box.scrollTop = box.scrollHeight; renderChat.done = true; }
+  renderMembers();
+  // строка ввода
+  $('say').hidden = !token; $('sayOff').hidden = !!token;
+  if (!token){
+    $('sayOff').innerHTML = entries.some(isMe)
+      ? 'Ты в гильдии, но на этом устройстве чат не открыт. Попроси у офицера личную ссылку или <a href="./">нажми на камень</a> с тем же именем на устройстве, где записывался.'
+      : 'Чтобы читать и писать в чат, <a href="./">нажми на камень возвращения</a> и вступи в гильдию.';
+  }
+}
+function setUnread(n){
+  unread = n; $('unread').hidden = !n; $('unread').textContent = n > 99 ? '99+' : String(n);
+}
+async function pollChat(){
+  if (pollChat.busy) return;
+  pollChat.busy = true; clearTimeout(pollTimer);
+  if (token){
+    try {
+      const since = chatLoaded && msgs.length ? msgs[msgs.length - 1].id : 0;
+      const data = await post('chat_list', {token, since});
+      const keep = new Set(data.ids || []);
+      const had = msgs.length;
+      msgs = msgs.filter(m => keep.has(m.id));
+      const fresh = (data.msgs || []).filter(m => !msgs.some(x => x.id === m.id));
+      msgs = msgs.concat(fresh).sort((a, b) => a.id - b.id);
+      if (data.motd != null) motd = data.motd;
+      const on = new Set(data.online || []), onChanged = on.size !== online.size || [...on].some(x => !online.has(x));
+      online = on; if (onChanged){ renderBar(); if (view === 'chat') renderMembers(); }
+      if (chatLoaded && view !== 'chat'){ const others = fresh.filter(m => !me || m.eid !== me.id).length; if (others) setUnread(unread + others); }
+      chatErr = ''; chatLoaded = true;
+      if (view === 'chat' && (fresh.length || had !== msgs.length || !pollChat.drawn)){ renderChat(); pollChat.drawn = true; }
+    } catch (err) {
+      if (err.code === 'not_member'){ forgetToken(); renderTop(); if (view === 'chat') renderChat(); }
+      else { chatErr = 'Нет связи с гильдией. Пробую ещё раз…'; if (view === 'chat') renderChat(); }
+    }
+  }
+  pollChat.busy = false;
+  pollTimer = setTimeout(pollChat, token && view === 'chat' && !document.hidden ? 3500 : 30000);
+}
+$('say').addEventListener('submit', async e => {
+  e.preventDefault();
+  const inp = $('sayIn'), text = inp.value.trim();
+  if (!text || sending) return;
+  sending = true;
+  try {
+    const data = await post('chat_send', {token, text});
+    if (!msgs.some(m => m.id === data.msg.id)) msgs.push(data.msg);
+    inp.value = ''; chatErr = ''; renderChat(); $('chat').scrollTop = $('chat').scrollHeight;
+  } catch (err) {
+    if (err.code === 'not_member'){ forgetToken(); renderTop(); }
+    chatErr = 'Сообщение не отправлено: ' + (err.message || 'ошибка'); renderChat();
+  } finally { sending = false; inp.focus(); }
+});
+
+// список членов гильдии справа от чата: кто в сети — в цвете класса
+function renderMembers(){
+  const list = entries.map((e, i) => Object.assign({n: i}, e, {rank: e.rank == null ? 3 : +e.rank, on: online.has(e.id)}));
+  list.sort((a, b) => (b.on - a.on) || a.rank - b.rank || a.n - b.n);
+  $('members').innerHTML = list.map(e => `<div class="mm${e.on ? ' on' : ''}"${e.on ? ` style="color:var(--${esc(e.cls)})"` : ''} title="${esc(fullName(e))} — ${e.on ? 'в сети' : 'не в сети'}"><span>${esc(fullName(e))}</span>${e.rank === 0 ? CROWN : ''}</div>`).join('');
+}
+// верхняя полоса: в ростере — «Записались», в чате — канал и «в сети»
+function renderBar(){
+  const chat = view === 'chat';
+  $('barChk').hidden = chat; $('count').hidden = chat; $('launch').hidden = chat;
+  $('online').hidden = !chat;
+  const n = entries.filter(e => online.has(e.id)).length;
+  $('online').innerHTML = token ? `<b>${n}/${entries.length}</b> в сети` : `${entries.length} в гильдии`;
+}
+
+// ---------- информация о гильдии ----------
+function renderInfo(){
+  const n = entries.length, cc = {}, rc = {};
+  entries.forEach(e => { cc[e.cls] = (cc[e.cls] || 0) + 1; rc[e.race] = (rc[e.race] || 0) + 1; });
+  const d = G.daysLeft();
+  $('info').innerHTML = `
+    <section><h2>&lt;Reported&gt;</h2><p>Орда. ${n ? `Записались ${n} ${plural(n, ['человек', 'человека', 'человек'])}.` : 'Пока никто не записался.'} ${G.RELEASE > Date.now() ? `До старта WoW Forever — ${d} ${plural(d, ['день', 'дня', 'дней'])}.` : 'WoW Forever уже открыт.'}</p></section>
+    ${motd ? `<section><h2>Сообщение дня</h2><p class="motd">${esc(motd)}</p></section>` : ''}
+    <section><h2>Состав по классам</h2><div class="comp">${G.CLS_ORDER.map(c => `<div class="${cc[c] ? '' : 'zero'}">${G.classIcon(c)}<span style="color:var(--${c})">${G.CLASSES[c]}</span><b>${cc[c] || 0}</b></div>`).join('')}</div></section>
+    <section><h2>Расы</h2><div class="comp races">${Object.keys(G.RACES).map(r => `<div class="${rc[r] ? '' : 'zero'}">${G.raceIcon(r)}<span>${G.RACES[r]}</span><b>${rc[r] || 0}</b></div>`).join('')}</div></section>`;
+}
+
+function renderAll(){ renderTop(); renderRoster(); if (view === 'chat') renderChat(); if (view === 'info') renderInfo(); }
+
+// ---------- вкладки ----------
+function setView(v){
+  view = v; hideTip();
+  $('vRoster').hidden = v !== 'roster'; $('vChat').hidden = v !== 'chat'; $('vInfo').hidden = v !== 'info';
+  document.querySelectorAll('.gw-tab[data-view]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.view === v)));
+  renderBar();
+  if (v === 'chat'){ setUnread(0); renderChat(); $('chat').scrollTop = $('chat').scrollHeight; pollChat(); if (token && matchMedia('(hover:hover)').matches) $('sayIn').focus(); }
+  if (v === 'info') renderInfo();
+  if (v === 'roster') syncBar();
+  const url = location.pathname + (v === 'chat' ? '#chat' : '');
+  if (location.pathname + location.hash !== url) history.replaceState(null, '', url);
+}
+document.querySelectorAll('.gw-tab[data-view]').forEach(b => b.addEventListener('click', () => setView(b.dataset.view)));
+$('miniBtn').addEventListener('click', () => {
+  const on = $('gw').classList.toggle('mini');
+  $('miniBtn').setAttribute('aria-pressed', String(on));
+  $('miniBtn').setAttribute('aria-label', on ? 'Показать список сообществ' : 'Скрыть список сообществ');
+  hideTip(); syncBar();
+});
+
+// ---------- сортировка ----------
+document.querySelectorAll('.gw-head .th').forEach(b => b.addEventListener('click', () => {
+  if (sortK === b.dataset.k) sortDir = -sortDir; else { sortK = b.dataset.k; sortDir = 1; }
+  renderRoster();
+}));
+
+// ---------- выбор строки и подсказка ----------
+const tt = $('tt');
+function entryById(id){ return entries.find(e => e.id === id); }
+function tipHtml(e){
+  const race = G.RACES[e.race] || '', cls = G.CLASSES[e.cls] || '';
+  return `<p class="n">${esc(fullName(e))}</p><p class="rk">${esc(rankName(e.rank == null ? 3 : +e.rank))}</p><p>Уровень 1 · ${esc(race)} · <span style="color:var(--${esc(e.cls)})">${esc(cls)}</span></p><p>Записался ${esc(G.dateLong(e.at))}</p>${e.note ? `<p class="nt">${esc(e.note)}</p>` : ''}${isMe(e) ? '<p class="me">Это ты</p>' : ''}`;
+}
+function showTip(row){
+  const e = entryById(row.dataset.id); if (!e) return;
+  tt.innerHTML = tipHtml(e); tt.classList.add('on');
+  const r = row.getBoundingClientRect(), L = $('list').getBoundingClientRect();
+  const w = tt.offsetWidth, hh = tt.offsetHeight, vw = document.documentElement.clientWidth, vh = window.innerHeight;
+  let x = L.left - w - 6, y = r.top - hh - 4;            // как в игре: слева от списка, над строкой
+  if (x < 8){ x = Math.min(Math.max(8, r.left + 44), vw - w - 8); }
+  if (y < 8) y = r.bottom + 4;
+  if (y + hh > vh - 8) y = Math.max(8, r.top - hh - 4);
+  tt.style.transform = `translate(${Math.round(x)}px, ${Math.round(y)}px)`;
+}
+function hideTip(){ tt.classList.remove('on'); }
+function select(row){
+  if (!row) return;
+  selId = row.dataset.id;
+  $('list').querySelectorAll('.row').forEach(x => { const on = x === row; x.classList.toggle('sel', on); x.setAttribute('aria-selected', String(on)); });
+}
+const list = $('list');
+let lastPointer = 'mouse';
+list.addEventListener('pointerdown', e => { lastPointer = e.pointerType; });
+list.addEventListener('pointerover', e => { const row = e.target.closest('.row'); if (row && e.pointerType === 'mouse') showTip(row); });
+list.addEventListener('pointerout', e => { const row = e.target.closest('.row'); if (row && e.pointerType === 'mouse' && !row.contains(e.relatedTarget)) hideTip(); });
+list.addEventListener('click', e => {
+  const row = e.target.closest('.row'); if (!row) return;
+  select(row);
+  if (lastPointer !== 'mouse'){ showTip(row); clearTimeout(showTip.t); showTip.t = setTimeout(hideTip, 4000); }
+});
+list.addEventListener('focusin', e => { const row = e.target.closest('.row'); if (row && row.matches(':focus-visible')) showTip(row); });
+list.addEventListener('focusout', () => { if (lastPointer === 'mouse') hideTip(); });
+list.addEventListener('keydown', e => {
+  const row = e.target.closest('.row'); if (!row) return;
+  if (e.key === 'ArrowDown' || e.key === 'ArrowUp'){
+    e.preventDefault();
+    const next = e.key === 'ArrowDown' ? row.nextElementSibling : row.previousElementSibling;
+    if (next){ next.focus(); next.scrollIntoView({block: 'nearest'}); showTip(next); }
+  } else if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); select(row); }
+});
+document.addEventListener('pointerdown', e => { if (!e.target.closest('.row')) hideTip(); });
+window.addEventListener('scroll', hideTip, {passive: true});
+
+// ---------- полоса прокрутки ----------
+const sb = $('sb'), thumb = $('thumb'), track = thumb.parentElement;
+const [upBtn, downBtn] = sb.querySelectorAll('button');
+function syncBar(){
+  const sh = list.scrollHeight, ch = list.clientHeight, st = list.scrollTop;
+  const over = sh > ch + 1 && getComputedStyle(list).overflowY !== 'visible';
+  sb.classList.toggle('off', !over); upBtn.disabled = !over || st <= 0; downBtn.disabled = !over || st + ch >= sh - 1;
+  if (!over) return;
+  const th = track.clientHeight, hgt = Math.max(24, th * ch / sh), top = (th - hgt) * st / (sh - ch);
+  thumb.style.height = hgt + 'px'; thumb.style.transform = `translateY(${top}px)`;
+}
+list.addEventListener('scroll', () => { syncBar(); hideTip(); }, {passive: true});
+window.addEventListener('resize', () => { syncBar(); hideTip(); });
+sb.querySelectorAll('button').forEach(b => b.addEventListener('click', () => list.scrollBy({top: (+b.dataset.d) * 3 * ((list.querySelector('.row') || {}).offsetHeight || 26), behavior: 'smooth'})));
+track.addEventListener('pointerdown', e => {
+  if (e.target === thumb) return;
+  const r = thumb.getBoundingClientRect();
+  list.scrollBy({top: (e.clientY < r.top ? -1 : 1) * list.clientHeight * .9, behavior: 'smooth'});
+});
+thumb.addEventListener('pointerdown', e => {
+  e.preventDefault(); thumb.setPointerCapture(e.pointerId);
+  const y0 = e.clientY, s0 = list.scrollTop, k = (list.scrollHeight - list.clientHeight) / Math.max(1, track.clientHeight - thumb.offsetHeight);
+  const move = ev => { list.scrollTop = s0 + (ev.clientY - y0) * k; };
+  const up = () => { thumb.removeEventListener('pointermove', move); thumb.removeEventListener('pointerup', up); thumb.removeEventListener('pointercancel', up); };
+  thumb.addEventListener('pointermove', move); thumb.addEventListener('pointerup', up); thumb.addEventListener('pointercancel', up);
+});
+
+// ---------- загрузка ----------
+async function load(){
+  try {
+    const res = await fetch('api.php?action=list', {cache: 'no-store'});
+    const data = await res.json();
+    if (!data.ok) throw new Error('bad');
+    entries = data.entries || []; loaded = true;
+    if (data.motd != null) motd = data.motd;
+    if (!mePicked && meKey()){ const m = entries.find(isMe); if (m){ selId = m.id; mePicked = true; } }
+    renderAll();
+    if (mePicked && !load.scrolled && view === 'roster'){ load.scrolled = true; const row = list.querySelector('.row.sel'); if (row) row.scrollIntoView({block: 'nearest'}); }
+  } catch (e) {
+    if (!entries.length){ $('count').textContent = 'Не удалось загрузить ростер'; $('list').innerHTML = '<div class="gw-empty"><b>Нет связи с гильдией</b><span>Проверь интернет и обнови страницу.</span></div>'; }
+  }
+}
+
+async function start(){
+  if (linkKey){
+    try { const d = await post('whoami', {token: linkKey[1]}); saveMe(d.entry, linkKey[1]); }
+    catch (e) { /* ссылка устарела — покажем чат как гостю */ }
+  }
+  setView(view);
+  await load();
+  if (view === 'chat') renderChat(); else pollChat();
+}
+renderAll();
+start();
+setInterval(() => { if (!document.hidden) load(); }, 60000);
+document.addEventListener('visibilitychange', () => { if (!document.hidden){ load(); pollChat(); } });
+})();
+</script>
+</body>
+</html>
