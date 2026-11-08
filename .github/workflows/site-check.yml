@@ -6,6 +6,11 @@ on:
   pull_request:
   workflow_dispatch:
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   check:
     runs-on: ubuntu-latest
@@ -21,6 +26,11 @@ jobs:
           npx playwright install --with-deps chromium
       - name: Check pages and capture screenshots
         run: node tests/site-check.mjs
+      - name: Package validated site
+        if: github.event_name == 'push'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
       - name: Upload screenshots
         if: always()
         uses: actions/upload-artifact@v4
@@ -29,3 +39,15 @@ jobs:
           path: site-screenshots/
           if-no-files-found: warn
           retention-days: 30
+
+  deploy:
+    if: github.event_name == 'push'
+    needs: check
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy only after browser checks pass
+        id: deployment
+        uses: actions/deploy-pages@v4
