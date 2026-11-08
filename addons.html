@@ -146,7 +146,7 @@ button{font:inherit; color:inherit}
   function dateLong(s){ var d = ymd(s); return d ? d[2] + ' ' + MONTHS[d[1] - 1] : ''; }
   function isNew(s){ var d = ymd(s); return !!d && Date.now() - Date.UTC(d[0], d[1] - 1, d[2]) < NEW_DAYS * 864e5; }
   function safeId(s){ return String(s || '').replace(/[^A-Za-z0-9_-]/g, ''); }
-  function safeImg(s){ return /^img\/[A-Za-z0-9_\/.-]+\.(jpg|png|webp)$/.test(s || '') ? s : 'site/img/icons/spell_nature_sleep.jpg'; }
+  function safeImg(s){ return /^site\/img\/[A-Za-z0-9_\/.-]+\.(jpg|png|webp)$/.test(s || '') ? s : 'site/img/icons/spell_nature_sleep.jpg'; }
   var DL = '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3v10M5.5 8.5 10 13l4.5-4.5M4 17h12"/></svg>';
 
   function card(a){
@@ -161,7 +161,7 @@ button{font:inherit; color:inherit}
         '<div><h2>' + esc(a.title) + '</h2>' +
           '<p class="ad-meta">v' + esc(a.version) + ' · ' + esc(dateLong(a.released)) + (isNew(a.released) ? ' · <span class="new">новая версия</span>' : '') + '</p>' +
           (a.short ? '<p class="ad-short">' + esc(a.short) + '</p>' : '') + '</div>' +
-        ''<span class="ad-meta">Скачивание пока недоступно</span>' +
+        '<span class="ad-meta">Скачивание пока недоступно</span>' +
       '</div>' +
       (more ? '<details class="ad-more"><summary>Подробнее</summary><div class="det">' + more + '</div></details>' : '') +
     '</article>';
