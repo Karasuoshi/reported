@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Аддоны · &lt;Reported&gt;</title>
-<meta name="description" content="Описание аддонов для WoW Forever.">
+<meta name="description" content="Описание аддона Karasuoshi Rested Buff для WoW Forever.">
 <link rel="icon" type="image/png" href="site/img/icon-64.png">
 <link rel="apple-touch-icon" href="site/img/icon-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -115,21 +115,14 @@ button{font:inherit; color:inherit}
 
   <header class="hero">
     <h1>Аддоны</h1>
-    <p>Аддоны гильдии для WoW Forever</p>
+    <p>Аддон для WoW Forever</p>
   </header>
 
   <div class="list" id="list"><div class="ad"><div class="empty">Загружаю…</div></div></div>
 
-  <section class="how"><h2>Информация</h2><p>Страница описывает возможности аддона. Скачивание пока недоступно.</p></section>
+  <section class="how"><h2>Об аддоне</h2><p>Возможности, команды и история обновлений. Скачивание пока не открыто.</p></section>
 
-  <footer class="foot">
-    <nav aria-label="Разделы сайта">
-      <a class="go" href="./">Путь новичка</a>
-      
-      
-    </nav>
-    <p>Нашёл ошибку в аддоне — напиши в чат гильдии.</p>
-  </footer>
+  <footer class="foot"><nav aria-label="Разделы сайта"><a class="go" href="./">Путь новичка</a><a class="ghost" href="addons.html">Аддон</a></nav><p>&lt;Reported&gt; · World of Warcraft Forever</p></footer>
 </main>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -161,7 +154,7 @@ button{font:inherit; color:inherit}
         '<div><h2>' + esc(a.title) + '</h2>' +
           '<p class="ad-meta">v' + esc(a.version) + ' · ' + esc(dateLong(a.released)) + (isNew(a.released) ? ' · <span class="new">новая версия</span>' : '') + '</p>' +
           (a.short ? '<p class="ad-short">' + esc(a.short) + '</p>' : '') + '</div>' +
-        '<span class="ad-meta">Скачивание пока недоступно</span>' +
+        '<a class="go" href="addons/download.php?id=' + encodeURIComponent(a.id) + '">' + DL + 'Скачать</a>' +
       '</div>' +
       (more ? '<details class="ad-more"><summary>Подробнее</summary><div class="det">' + more + '</div></details>' : '') +
     '</article>';
