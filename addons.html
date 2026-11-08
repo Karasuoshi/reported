@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Аддоны · &lt;Reported&gt;</title>
+<meta name="description" content="Описание аддонов для WoW Forever.">
+<link rel="icon" type="image/png" href="site/img/icon-64.png">
+<link rel="apple-touch-icon" href="site/img/icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Open+Sans:wght@400;600&family=Philosopher:wght@400;700&family=Onest:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Стиль как у «Пути новичка». Список строится по addons/addons.json:
+   новый аддон или версия = правка только json, html не меняется. */
+:root{
+  color-scheme: dark;
+  --bg:#060910; --s2:#151b25; --s3:#1f2735;
+  --line:rgba(200,225,255,.1); --line2:rgba(200,225,255,.2);
+  --text:#f1ede4; --muted:#9ca6b5; --dim:#667080;
+  --gold:#ffd100; --rune:#72e6ff; --ember:#ffb23f; --ok:#46e06a; --np:#8080f8;
+  --f-game:"Marcellus","Philosopher","Palatino Linotype",Georgia,serif;
+  --f-ui:"Philosopher","Palatino Linotype",Georgia,serif;
+  --f-body:"Onest","Segoe UI",system-ui,-apple-system,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{min-height:100%}
+body{margin:0; min-height:100vh; color:var(--text); font:16px/1.6 var(--f-body); -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  background:
+    radial-gradient(1px 1px at 12% 18%, rgba(207,230,255,.7), transparent 60%),
+    radial-gradient(1px 1px at 72% 12%, rgba(207,230,255,.6), transparent 60%),
+    radial-gradient(1.5px 1.5px at 88% 42%, rgba(207,230,255,.5), transparent 60%),
+    radial-gradient(1px 1px at 30% 64%, rgba(207,230,255,.5), transparent 60%),
+    radial-gradient(1px 1px at 6% 78%, rgba(207,230,255,.5), transparent 60%),
+    radial-gradient(ellipse 42% 26% at 50% 0%, rgba(255,140,40,.12), rgba(255,140,40,0) 70%),
+    radial-gradient(ellipse 90% 70% at 50% 40%, #10233b 0%, #0a121d 45%, var(--bg) 100%) fixed, var(--bg)}
+a{color:#8fe0ff}
+a:hover{color:#fff}
+button{font:inherit; color:inherit}
+:focus-visible{outline:2px solid var(--rune); outline-offset:3px; border-radius:4px}
+
+.stage{max-width:820px; margin:0 auto; padding-inline:16px; padding-block:calc(clamp(18px,3.5vh,32px) + env(safe-area-inset-top,0px)) calc(40px + env(safe-area-inset-bottom,0px)); display:grid; gap:26px}
+.stage > *{min-width:0}
+
+.brand{display:grid; justify-items:center; gap:4px; text-decoration:none; width:max-content; margin:0 auto}
+.moon{width:clamp(58px,8vw,72px); height:auto; filter:drop-shadow(0 0 18px rgba(255,150,40,.45)) drop-shadow(0 0 50px rgba(255,120,20,.2))}
+.np{font-family:var(--f-game); color:var(--np); margin:0; font-size:clamp(20px,3vw,24px); line-height:1.1; text-shadow:1.5px 1.5px 0 rgba(0,0,0,.92), 0 3px 10px rgba(0,0,0,.55)}
+.hero{display:grid; justify-items:center; gap:8px; text-align:center}
+.hero h1{margin:0; font:400 clamp(38px,7vw,56px)/1.05 var(--f-game); color:#ffd36b; text-shadow:2px 2px 0 rgba(0,0,0,.9), 0 0 30px rgba(255,170,60,.25)}
+.hero p{margin:0; color:#d9d4ca; font-size:17px}
+
+/* список аддонов */
+.list{display:grid; gap:14px}
+.ad{position:relative; border-radius:7px; background:linear-gradient(180deg,#12161f,#0c1017); scroll-margin-top:20px;
+  box-shadow:0 0 0 1px #000, 0 0 0 3px #7c603d, 0 0 0 4px #3a2610, 0 0 0 5px #000, 0 20px 50px -24px #000}
+.ad-row{display:grid; grid-template-columns:56px minmax(0,1fr) auto; gap:16px; align-items:center; padding:16px 18px}
+.ad-ico{width:56px; height:56px; border-radius:6px; display:block; box-shadow:0 0 0 1px #000, 0 0 0 2px #8e7d56, 0 0 0 3px #000}
+.ad h2{margin:0; font:400 21px/1.2 var(--f-game); color:var(--gold); text-shadow:1px 1px 0 #000}
+.ad-meta{margin:2px 0 0; font:13px/1.3 var(--f-mono); color:var(--muted)}
+.ad-meta .new{color:var(--ok)}
+.ad-short{margin:6px 0 0; font-size:15px; line-height:1.5; color:#d9d4ca}
+.go{display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:11px 20px; border-radius:999px; text-decoration:none; white-space:nowrap; font:400 16px/1 var(--f-game); color:#1a1004; background:linear-gradient(180deg,#ffd173,#ff9f2e); box-shadow:0 10px 26px -12px rgba(255,160,50,.7)}
+.go:hover{color:#1a1004; background:linear-gradient(180deg,#ffdc8e,#ffab45)}
+.go svg{width:16px; height:16px}
+
+/* «Подробнее» */
+.ad-more{border-top:1px solid var(--line)}
+.ad-more > summary{cursor:pointer; list-style:none; padding:10px 18px; font:400 15px/1.2 var(--f-game); color:#8fe0ff; display:flex; align-items:center; gap:8px}
+.ad-more > summary::-webkit-details-marker{display:none}
+.ad-more > summary::before{content:"▸"; font-size:12px; color:var(--ember); transition:transform .15s}
+.ad-more[open] > summary::before{transform:rotate(90deg)}
+.ad-more > summary:hover{color:#fff}
+.det{padding:4px 18px 18px; display:grid; gap:18px}
+.det h3{margin:0 0 8px; font:600 11px/1 var(--f-mono); letter-spacing:.14em; text-transform:uppercase; color:var(--ember)}
+.det ul{margin:0; padding:0; list-style:none; display:grid; gap:6px}
+.facts li{position:relative; padding-left:16px; font-size:15px; line-height:1.5; color:#d9d4ca}
+.facts li::before{content:""; position:absolute; left:2px; top:.6em; width:6px; height:6px; transform:rotate(45deg); background:var(--ember)}
+.cmds li, .log li{display:grid; grid-template-columns:150px minmax(0,1fr); gap:12px; font-size:14.5px; line-height:1.45; color:#d9d4ca}
+.cmds code{font:600 13.5px/1.45 var(--f-mono); color:var(--gold)}
+.log b{font:600 13.5px/1.45 var(--f-mono); color:var(--gold)}
+.log b small{font-weight:400; color:var(--dim); margin-left:8px}
+
+/* общая инструкция */
+.how{border-radius:10px; background:rgba(14,19,27,.78); border:1px solid var(--line); padding:16px 18px}
+.how h2{margin:0 0 10px; font:400 20px/1.2 var(--f-game); color:var(--text)}
+.how ol{margin:0; padding-left:22px; display:grid; gap:6px; color:#d9d4ca; font-size:15px}
+.how code{font:500 13.5px/1.4 var(--f-mono); color:var(--rune); overflow-wrap:anywhere}
+.copy{margin-left:6px; padding:1px 8px; border:1px solid var(--line2); border-radius:999px; background:var(--s2); font:500 12px/1.5 var(--f-body); color:var(--muted); cursor:pointer}
+.copy:hover{color:var(--text); background:var(--s3)}
+
+.empty{padding:26px 18px; text-align:center; color:var(--muted)}
+.foot{display:grid; justify-items:center; gap:12px; text-align:center; color:var(--muted); font-size:13.5px}
+.foot nav{display:flex; flex-wrap:wrap; justify-content:center; gap:10px}
+.foot p{margin:0}
+.ghost{display:inline-flex; align-items:center; padding:11px 18px; border-radius:999px; border:1px solid var(--line2); background:var(--s2); text-decoration:none; font:500 14px/1 var(--f-body); color:var(--text)}
+.ghost:hover{background:var(--s3); color:var(--text)}
+.toast{position:fixed; left:50%; bottom:calc(22px + env(safe-area-inset-bottom,0px)); transform:translateX(-50%); opacity:0; pointer-events:none; padding:8px 16px; border-radius:999px; background:#06091c; border:1px solid #bfc0c8; font-size:14px; transition:opacity .15s}
+.toast.on{opacity:1}
+
+@media (max-width:600px){
+  .ad-row{grid-template-columns:48px minmax(0,1fr); gap:12px; padding:14px}
+  .ad-ico{width:48px; height:48px}
+  .ad-row .go{grid-column:1 / -1}
+  .ad-more > summary{padding-inline:14px} .det{padding-inline:14px}
+  .cmds li, .log li{grid-template-columns:minmax(0,1fr); gap:0}
+}
+</style>
+</head>
+<body>
+
+<main class="stage">
+  <a class="brand" href="./" aria-label="К камню возвращения"><img class="moon" src="site/img/moon.webp" alt="Reported" width="406" height="440"><p class="np">&lt;Reported&gt;</p></a>
+
+  <header class="hero">
+    <h1>Аддоны</h1>
+    <p>Аддоны гильдии для WoW Forever</p>
+  </header>
+
+  <div class="list" id="list"><div class="ad"><div class="empty">Загружаю…</div></div></div>
+
+  <section class="how"><h2>Информация</h2><p>Страница описывает возможности аддона. Скачивание пока недоступно.</p></section>
+
+  <footer class="foot">
+    <nav aria-label="Разделы сайта">
+      <a class="go" href="./">Путь новичка</a>
+      
+      
+    </nav>
+    <p>Нашёл ошибку в аддоне — напиши в чат гильдии.</p>
+  </footer>
+</main>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+  var MONTHS = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+  var LOG_SHOWN = 3;   // сколько последних версий показывать в «Подробнее»
+  var NEW_DAYS = 7;    // сколько дней версия считается новой
+
+  function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  function arr(x){ return Array.isArray(x) ? x : []; }
+  function ymd(s){ var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s || ''); return m ? [+m[1], +m[2], +m[3]] : null; }
+  function dateLong(s){ var d = ymd(s); return d ? d[2] + ' ' + MONTHS[d[1] - 1] : ''; }
+  function isNew(s){ var d = ymd(s); return !!d && Date.now() - Date.UTC(d[0], d[1] - 1, d[2]) < NEW_DAYS * 864e5; }
+  function safeId(s){ return String(s || '').replace(/[^A-Za-z0-9_-]/g, ''); }
+  function safeImg(s){ return /^img\/[A-Za-z0-9_\/.-]+\.(jpg|png|webp)$/.test(s || '') ? s : 'site/img/icons/spell_nature_sleep.jpg'; }
+  var DL = '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3v10M5.5 8.5 10 13l4.5-4.5M4 17h12"/></svg>';
+
+  function card(a){
+    var id = safeId(a.id), feats = arr(a.features), cmds = arr(a.commands), log = arr(a.changelog).slice(0, LOG_SHOWN);
+    var more = '';
+    if (feats.length) more += '<div><h3>Что умеет</h3><ul class="facts">' + feats.map(function(f){ return '<li>' + esc(f) + '</li>'; }).join('') + '</ul></div>';
+    if (cmds.length) more += '<div><h3>Команды</h3><ul class="cmds">' + cmds.map(function(c){ return '<li><code>' + esc(c[0]) + '</code><span>' + esc(c[1]) + '</span></li>'; }).join('') + '</ul></div>';
+    if (log.length) more += '<div><h3>Что нового</h3><ul class="log">' + log.map(function(c){ return '<li><b>' + esc(c[0]) + '</b><span>' + esc(c[2]) + '</span></li>'; }).join('') + '</ul></div>';
+    return '<article class="ad" id="' + id + '">' +
+      '<div class="ad-row">' +
+        '<img class="ad-ico" src="' + esc(safeImg(a.icon)) + '" alt="" width="56" height="56">' +
+        '<div><h2>' + esc(a.title) + '</h2>' +
+          '<p class="ad-meta">v' + esc(a.version) + ' · ' + esc(dateLong(a.released)) + (isNew(a.released) ? ' · <span class="new">новая версия</span>' : '') + '</p>' +
+          (a.short ? '<p class="ad-short">' + esc(a.short) + '</p>' : '') + '</div>' +
+        ''<span class="ad-meta">Скачивание пока недоступно</span>' +
+      '</div>' +
+      (more ? '<details class="ad-more"><summary>Подробнее</summary><div class="det">' + more + '</div></details>' : '') +
+    '</article>';
+  }
+
+  var list = document.getElementById('list');
+  fetch('site/addons/addons.json', {cache: 'no-store'})
+    .then(function(r){ if (!r.ok) throw 0; return r.json(); })
+    .then(function(data){
+      var items = arr(data && data.addons);
+      list.innerHTML = items.length ? items.map(card).join('') : '<div class="ad"><div class="empty">Аддонов пока нет.</div></div>';
+      if (location.hash){ var t = document.getElementById(location.hash.slice(1)); if (t){ var d = t.querySelector('details'); if (d) d.open = true; t.scrollIntoView(); } }
+    })
+    .catch(function(){ list.innerHTML = '<div class="ad"><div class="empty">Не удалось загрузить список. Обнови страницу.</div></div>'; });
+
+  // кнопка «Копировать» у пути
+  var toastT;
+  function toast(t){ var el = document.getElementById('toast'); el.textContent = t; el.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(function(){ el.classList.remove('on'); }, 1600); }
+  document.addEventListener('click', function(e){
+    var b = e.target.closest && e.target.closest('[data-copy]'); if (!b) return;
+    var text = b.getAttribute('data-copy');
+    var ta = document.createElement('textarea'); ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); toast('Путь скопирован'); } catch (x) { toast('Не получилось скопировать'); }
+    document.body.removeChild(ta);
+  });
+})();
+</script>
+</body>
+</html>
