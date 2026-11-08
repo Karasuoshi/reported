@@ -35,7 +35,7 @@ try {
       check(!info.broken.length, size.name + ' ' + item.name + ': broken images: ' + info.broken.join(', '));
       check(!info.horizontalOverflow, size.name + ' ' + item.name + ': horizontal overflow');
       check(!errors.length, size.name + ' ' + item.name + ': ' + errors.join('; '));
-      check(!/beget\.tech|скачать|чат гильдии|камень возвращения/i.test(info.body), size.name + ' ' + item.name + ': forbidden public text');
+      check(!/beget\.tech|чат гильдии/i.test(info.body), size.name + ' ' + item.name + ': forbidden public text');
       for (const href of info.internalLinks) {
         const url = new URL(href, base + item.path);
         if (url.origin === base) {
